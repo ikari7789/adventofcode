@@ -1,6 +1,6 @@
 <?php
 
-$inputFile = '07_test.txt';
+$inputFile = '07.txt';
 
 /**
  * --- Day 7: Handy Haversacks ---
@@ -41,6 +41,8 @@ $inputFile = '07_test.txt';
 
 $input = new SplFileObject($inputFile);
 
+$colorToFind = 'shiny gold';
+
 $bags = [];
 while (! $input->eof()) {
     $line = $input->fgets();
@@ -53,7 +55,6 @@ while (! $input->eof()) {
     preg_match('/^([a-z ]+?) bags contain((?: (?:\d+ [a-z ]+|no other) bags?(?:\.|,))+)/', $line, $matches);
     $bagColor = $matches[1];
     $contents = $matches[2];
-    echo $bagColor.' | '.$contents.PHP_EOL;
     unset($matches);
 
     preg_match_all('/ (?:(\d+) ([a-z ]+)|no other) bags?(?:\.|,)/', $contents, $matches, PREG_SET_ORDER);
@@ -73,4 +74,67 @@ while (! $input->eof()) {
     $bags[$bagColor] = $contents;
 }
 
-print_r($bags);
+function countBagsThatHold($bags, $colorToFind, &$foundColors = []) {
+    foreach ($bags as $color => $contents) {
+        foreach ($contents as $bagType) {
+            if ($bagType['color'] === $colorToFind) {
+                $foundColors[] = $color;
+                countBagsThatHold($bags, $color, $foundColors);
+            }
+        }
+    }
+}
+
+$found = [];
+countBagsThatHold($bags, $colorToFind, $found);
+$found = array_unique($found);
+
+printf('Number of bags that can hold %s: %d'.PHP_EOL, $colorToFind, count($found));
+
+/**
+ * --- Part Two ---
+ * 
+ * It's getting pretty expensive to fly these days - not because of ticket prices, but because of the ridiculous number of bags you need to buy!
+ * 
+ * Consider again your shiny gold bag and the rules from the above example:
+ * 
+ *   - faded blue bags contain 0 other bags.
+ *   - dotted black bags contain 0 other bags.
+ *   - vibrant plum bags contain 11 other bags: 5 faded blue bags and 6 dotted black bags.
+ *   - dark olive bags contain 7 other bags: 3 faded blue bags and 4 dotted black bags.
+ * 
+ * So, a single shiny gold bag must contain 1 dark olive bag (and the 7 bags within it) plus 2 vibrant plum bags (and the 11 bags within each of those): 1 + 1*7 + 2 + 2*11 = 32 bags!
+ * 
+ * Of course, the actual rules have a small chance of going several levels deeper than this example; be sure to count all of the bags, even if the nesting becomes topologically impractical!
+ * 
+ * Here's another example:
+ * 
+ * ```
+ * shiny gold bags contain 2 dark red bags.
+ * dark red bags contain 2 dark orange bags.
+ * dark orange bags contain 2 dark yellow bags.
+ * dark yellow bags contain 2 dark green bags.
+ * dark green bags contain 2 dark blue bags.
+ * dark blue bags contain 2 dark violet bags.
+ * dark violet bags contain no other bags.
+ * ```
+ * 
+ * In this example, a single shiny gold bag must contain 126 other bags.
+ * 
+ * How many individual bags are required inside your single shiny gold bag?
+ */
+
+function countInnerBags($bags, $color, $previousSum = 1) {
+    $sum = 0;
+
+    foreach ($bags[$color] as $contents) {
+        $sum += $previousSum * $contents['count'];
+        $sum += countInnerBags($bags, $contents['color'], $previousSum * $contents['count']);
+    }
+
+    return $sum;
+}
+
+$sum = countInnerBags($bags, $colorToFind);
+
+printf('Number of bags that %s must hold: %d'.PHP_EOL, $colorToFind, $sum);
