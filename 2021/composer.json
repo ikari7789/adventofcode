@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "php-ds/php-ds": "^1.4"
+        "php-ds/php-ds": "^1.4",
+        "psy/psysh": "^0.11.0"
     },
     "autoload": {
         "psr-4": {
