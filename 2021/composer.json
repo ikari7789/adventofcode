@@ -10,7 +10,8 @@
     ],
     "require": {
         "php-ds/php-ds": "^1.4",
-        "psy/psysh": "^0.11.0"
+        "psy/psysh": "^0.11.0",
+        "symfony/var-dumper": "^6.0"
     },
     "autoload": {
         "psr-4": {
