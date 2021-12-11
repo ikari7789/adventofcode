@@ -1,6 +1,6 @@
 <?php
 
-$input = new SplFileObject('input.txt');
+$input = new SplFileObject(__DIR__ . '/input.txt');
 
 $deeperMeasurements = 0;
 $previousDepth = null;

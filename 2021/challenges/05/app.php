@@ -1,7 +1,7 @@
 <?php
 
 define('DEBUG', false);
-define('INPUT_FILE', 'input.txt');
+define('INPUT_FILE', __DIR__ . '/input.txt');
 define('MAP_SIZE', 1000);
 define('HORIZONTAL', 0);
 define('VERTICAL', 1);

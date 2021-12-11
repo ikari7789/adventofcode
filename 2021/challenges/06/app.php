@@ -1,7 +1,7 @@
 <?php
 
 define('DEBUG', false);
-define('INPUT_FILE', 'input.txt');
+define('INPUT_FILE', __DIR__ . '/input.txt');
 define('DAYS_TILL_BIRTH', 6);
 define('INITIAL_DAYS_TILL_BIRTH', 8);
 define('DAYS_TO_SIMULATE', 80);

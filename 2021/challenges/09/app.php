@@ -1,7 +1,7 @@
 <?php
 
 define('DEBUG', true);
-define('INPUT_FILE', 'input.txt');
+define('INPUT_FILE', __DIR__ . '/input.txt');
 define('UP', 0);
 define('RIGHT', 1);
 define('DOWN', 2);

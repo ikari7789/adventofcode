@@ -1,6 +1,6 @@
 <?php
 
-$input = new SplFileObject('input.txt');
+$input = new SplFileObject(__DIR__ . '/input.txt');
 
 $bits = [];
 while (! $input->eof() && $line = trim($input->fgets())) {

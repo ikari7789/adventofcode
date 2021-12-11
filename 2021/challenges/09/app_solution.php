@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Credit to https://www.reddit.com/r/adventofcode/comments/rca6vp/comment/hnw3huo/?utm_source=reddit&utm_medium=web2x&context=3
  */
 
-$input = new SplFileObject('input.txt');
+$input = new SplFileObject(__DIR__ . '/input.txt');
 
 $heights = [];
 while($row = $input->fgets())

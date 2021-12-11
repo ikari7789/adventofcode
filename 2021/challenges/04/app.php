@@ -1,6 +1,6 @@
 <?php
 
-$input = new SplFileObject('input.txt');
+$input = new SplFileObject(__DIR__ . '/input.txt');
 
 // Get numbers for bingo
 $numbers = explode(',', trim($input->fgets()));

@@ -1,7 +1,7 @@
 <?php
 
 define('DEBUG', true);
-define('INPUT_FILE', 'example_input.txt');
+define('INPUT_FILE', __DIR__ . '/input.txt');
 
 $input = new SplFileObject(INPUT_FILE);
 
