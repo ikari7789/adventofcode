@@ -1,0 +1,19 @@
+{
+    "name": "ikari7789/adventofcode",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Miller",
+            "email": "ikari7789@yahoo.com"
+        }
+    ],
+    "require": {
+        "php-ds/php-ds": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ikari7789\\Adventofcode\\2021\\": "src/"
+        }
+    }
+}
