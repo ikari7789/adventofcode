@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ikari7789\\Adventofcode\\2021\\": "src/"
+            "Ikari7789\\Adventofcode\\Year2021\\": "src/"
         }
     }
 }
