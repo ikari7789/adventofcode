@@ -8,8 +8,9 @@ define('HEIGHT', 895);
 define('WIDTH', 1311);
 define('X_AXIS', 'x');
 define('Y_AXIS', 'y');
+define('DOT', '░');
 
-$grid       = array_fill(0, HEIGHT, array_fill(0, WIDTH, '.'));
+$grid       = array_fill(0, HEIGHT, array_fill(0, WIDTH, ' '));
 $foldAlongs = [];
 
 $input = new SplFileObject(INPUT_FILE);
@@ -22,7 +23,7 @@ while (! $input->eof() && $line = $input->fgets()) {
             $y,
             $x,
         ] = explode(',', $line);
-        $grid[$x][$y] = '#';
+        $grid[$x][$y] = DOT;
     }
 
     if (preg_match('/^fold along (x|y)=(\d+)$/', $line, $matches)) {
@@ -66,7 +67,7 @@ function fold($grid, $axis, $line): array
 
     for ($row = 0; $row < count($grid); ++$row) {
         for ($column = 0; $column < count($grid[$row]); ++$column) {
-            if ($mirror[$row][$column] === '#') {
+            if ($mirror[$row][$column] === DOT) {
                 $grid[$row][$column] = $mirror[$row][$column];
             }
         }
@@ -81,7 +82,7 @@ function countDots(array $grid): int
 
     foreach ($grid as $columns) {
         foreach ($columns as $column) {
-            if ($column === '#') {
+            if ($column === DOT) {
                 ++$dots;
             }
         }
