@@ -11,7 +11,8 @@
     "require": {
         "php-ds/php-ds": "^1.4",
         "psy/psysh": "^0.11.0",
-        "symfony/var-dumper": "^6.0"
+        "symfony/var-dumper": "^6.0",
+        "delight-im/base-convert": "^1.1"
     },
     "autoload": {
         "psr-4": {
