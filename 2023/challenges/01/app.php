@@ -17,7 +17,6 @@ define('NUMBERS', [
     'eight' => '8',
     'nine'  => '9',
 ]);
-define('NUMBERS_REGEX', '/(?P<number>one|two|three|four|five|six|seven|eight|nine)/');
 
 $values = [];
 
