@@ -21,7 +21,7 @@ define('NUMBERS', [
 $values = [];
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     preg_match_all('/\d/', $line, $matches);
@@ -34,7 +34,7 @@ printf('Sum of all calibration values: %d' . PHP_EOL, array_sum($values));
 $values = [];
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     foreach (NUMBERS as $string => $integer) {

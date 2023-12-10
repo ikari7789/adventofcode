@@ -20,7 +20,7 @@ function printSchematic(array $schematic): void
 
 function readPartNumber(array $schematic, int $x, int $y): ?array
 {
-    if (! is_numeric($schematic[$y][$x])) {
+    if (!is_numeric($schematic[$y][$x])) {
         return null;
     }
 
@@ -106,7 +106,7 @@ function discoverParts(array $schematic): array
 
     for ($y = 0; $y < count($schematic); ++$y) {
         for ($x = 0; $x < count($schematic[$y]); ++$x) {
-            if (! preg_match('/[^\d\.]/', $schematic[$y][$x])) {
+            if (!preg_match('/[^\d\.]/', $schematic[$y][$x])) {
                 continue;
             }
 
@@ -170,7 +170,7 @@ function sumGearRatios(array $parts): int
 $schematic = [];
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     $schematic[] = mb_str_split($line);

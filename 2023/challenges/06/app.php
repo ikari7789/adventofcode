@@ -45,13 +45,13 @@ $times     = [];
 $distances = [];
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     if (preg_match('/^Time/', $line)) {
-        $times = array_values(array_map(fn ($item) => (int) $item, array_filter(explode(' ', explode(':', $line)[1]))));
+        $times = array_values(array_map(fn($item) => (int) $item, array_filter(explode(' ', explode(':', $line)[1]))));
     } elseif (preg_match('/^Distance/', $line)) {
-        $distances = array_values(array_map(fn ($item) => (int) $item, array_filter(explode(' ', explode(':', $line)[1]))));
+        $distances = array_values(array_map(fn($item) => (int) $item, array_filter(explode(' ', explode(':', $line)[1]))));
     }
 }
 
@@ -82,7 +82,7 @@ $time     = 0;
 $distance = 0;
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     if (preg_match('/^Time/', $line)) {

@@ -9,7 +9,7 @@ define('INPUT_FILE', __DIR__ . '/input.txt');
 
 function addMappingToSource(array $almanac, string $source, string $mapping): array
 {
-    if (! isset($almanac[$source])) {
+    if (!isset($almanac[$source])) {
         $almanac[$source] = [
             'maps_to' => '',
             'values'  => [],
@@ -47,7 +47,7 @@ function addSeeds(array $almanac, array $seeds): array
 
 function calculateMapping(array $almanac, int $value, ?string $source = 'seed'): int
 {
-    if (! isset($almanac[$source])) {
+    if (!isset($almanac[$source])) {
         return $value;
     }
 
@@ -101,7 +101,7 @@ $almanac      = [];
 $activeSource = null;
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     if (preg_match('/^(?P<source>[a-z]+)(?:-to-(?P<destination>[a-z]+) map)?:$/', $line, $matches)) {
@@ -109,7 +109,7 @@ while (! $input->eof() && $line = $input->fgets()) {
         $almanac = addMappingToSource($almanac, $matches['source'], $matches['destination']);
 
         $activeSource = $matches['source'];
-    } else if (preg_match('/^(?P<destination_range_start>\d+) (?P<source_range_start>\d+) (?<range_length>\d+)$/', $line, $matches)) {
+    } elseif (preg_match('/^(?P<destination_range_start>\d+) (?P<source_range_start>\d+) (?<range_length>\d+)$/', $line, $matches)) {
         // Match mappings
         $almanac = addRangeToSource(
             $almanac,
@@ -118,9 +118,9 @@ while (! $input->eof() && $line = $input->fgets()) {
             (int) $matches['source_range_start'],
             (int) $matches['range_length']
         );
-    } else if (preg_match('/^seeds:( \d+)+?$/', $line, $matches)) {
+    } elseif (preg_match('/^seeds:( \d+)+?$/', $line, $matches)) {
         // Match mappings
-        $almanac = addSeeds($almanac, array_map(fn ($item) => (int) $item, array_filter(explode(' ', explode(':', $line)[1]))));
+        $almanac = addSeeds($almanac, array_map(fn($item) => (int) $item, array_filter(explode(' ', explode(':', $line)[1]))));
     } else {
         // Empty or invalid line
         continue;

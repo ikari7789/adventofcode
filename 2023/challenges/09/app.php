@@ -11,8 +11,7 @@ class Sequence
 {
     public function __construct(
         readonly private array $history,
-    ) {
-    }
+    ) {}
 
     public function extrapolatePreviousStep(): int
     {
@@ -94,7 +93,7 @@ class Sequences implements ArrayAccess, Iterator
         return $this->sequences[$offset] ?? null;
     }
 
-    public function offsetSet($offset, $value): void 
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->sequences[] = $value;
@@ -139,7 +138,7 @@ class Sequences implements ArrayAccess, Iterator
 $sequences = new Sequences();
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     $sequences[] = new Sequence(array_map(intval(...), explode(' ', $line)));

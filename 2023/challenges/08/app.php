@@ -15,8 +15,7 @@ class Nodes
         readonly private array $directions,
         readonly private string $startNode = 'AAA',
         readonly private string $endNode = 'ZZZ',
-    ) {
-    }
+    ) {}
 
     public function nodes(): array
     {
@@ -67,8 +66,7 @@ class MultiNodes extends Nodes
         readonly private array $directions,
         readonly private string $startNode = 'A',
         readonly private string $endNode = 'Z',
-    ) {
-    }
+    ) {}
 
     public function nodes(): array
     {
@@ -115,7 +113,7 @@ class MultiNodes extends Nodes
                 }
             }
 
-            if (! in_array(0, $arrivedAtDestinationCounts, strict: true)) {
+            if (!in_array(0, $arrivedAtDestinationCounts, strict: true)) {
                 break;
             }
 
@@ -139,7 +137,7 @@ $nodes      = null;
 $multiNodes = null;
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     if (preg_match('/^[RL]+$/', $line, $matches)) {

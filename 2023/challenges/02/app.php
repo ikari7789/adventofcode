@@ -16,10 +16,9 @@ class Game
 
     public function __construct(
         readonly int $number,
-    ) {
-    }
+    ) {}
 
-    public function recordRound(int $red, int $green, int $blue) 
+    public function recordRound(int $red, int $green, int $blue)
     {
         $this->rounds[] = new Round($red, $green, $blue);
     }
@@ -31,9 +30,9 @@ class Game
         $minBlue  = 0;
 
         foreach ($this->rounds as $round) {
-            $minRed   = ($round->red > $minRed)     ? $round->red   : $minRed;
+            $minRed   = ($round->red > $minRed) ? $round->red : $minRed;
             $minGreen = ($round->green > $minGreen) ? $round->green : $minGreen;
-            $minBlue  = ($round->blue > $minBlue)   ? $round->blue  : $minBlue;
+            $minBlue  = ($round->blue > $minBlue) ? $round->blue : $minBlue;
         }
 
         return $minRed * $minGreen * $minBlue;
@@ -46,14 +45,13 @@ class Round
         readonly public int $red,
         readonly public int $green,
         readonly public int $blue,
-    ) {
-    }
+    ) {}
 }
 
 $games = [];
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     // Split by game, rounds

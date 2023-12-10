@@ -41,8 +41,7 @@ class Hand
     public function __construct(
         readonly private array $cards,
         readonly private int $wager,
-    ) {
-    }
+    ) {}
 
     public function cards(): array
     {
@@ -284,7 +283,7 @@ class CamelGame
 $camelGame = new CamelGame();
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     [

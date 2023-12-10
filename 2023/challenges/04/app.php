@@ -19,8 +19,7 @@ class Scratchcard
         protected int $cardNumber,
         protected array $numbers,
         protected array $winningNumbers,
-    ) {
-    }
+    ) {}
 
     public function getCardNumber(): int
     {
@@ -32,7 +31,7 @@ class Scratchcard
         if ($this->matches !== null) {
             return $this->matches;
         }
-        
+
         $this->matches = count(array_intersect($this->numbers, $this->winningNumbers));
 
         return $this->matches;
@@ -66,7 +65,7 @@ class Scratchcard
         for ($iterator = 0, $match = 1; $iterator < $matches - 1; ++$iterator) {
             $this->score += $match;
             $match *= 2;
-        } 
+        }
 
         return $this->score;
     }
@@ -75,7 +74,7 @@ class Scratchcard
 $scratchcards = [];
 
 $input = new SplFileObject(INPUT_FILE);
-while (! $input->eof() && $line = $input->fgets()) {
+while (!$input->eof() && $line = $input->fgets()) {
     $line = trim($line);
 
     [
@@ -96,8 +95,8 @@ while (! $input->eof() && $line = $input->fgets()) {
     $scratchcards[$cardNumber] = [
         'card' => new Scratchcard(
             (int) $cardNumber,
-            array_map(fn ($item) => (int) $item, array_filter(explode(' ', $numbers))),
-            array_map(fn ($item) => (int) $item, array_filter(explode(' ', $winningNumbers))),
+            array_map(fn($item) => (int) $item, array_filter(explode(' ', $numbers))),
+            array_map(fn($item) => (int) $item, array_filter(explode(' ', $winningNumbers))),
         ),
         'copies' => 1,
     ];
@@ -121,7 +120,7 @@ for ($cardNumber = 1; $cardNumber <= count($scratchcards); ++$cardNumber) {
     for ($copy = 0; $copy < $scratchcard['copies']; ++$copy) {
         $matches = $scratchcard['card']->matches();
         for ($match = 1; $match <= $matches; ++$match) {
-            if (! isset($scratchcards[$cardNumber + $match])) {
+            if (!isset($scratchcards[$cardNumber + $match])) {
                 continue;
             }
 
