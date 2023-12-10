@@ -23,7 +23,8 @@
         }
     },
     "require-dev": {
-        "pestphp/pest": "^2.26"
+        "pestphp/pest": "^2.26",
+        "friendsofphp/php-cs-fixer": "^3.41"
     },
     "config": {
         "allow-plugins": {
