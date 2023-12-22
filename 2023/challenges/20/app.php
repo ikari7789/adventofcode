@@ -22,13 +22,12 @@ enum ModuleType: string
 
 abstract class Module
 {
-    private array $inputs = [];
-    private array $outputs = [];
-
-    private array $send = [];
+    protected array $inputs = [];
+    protected array $outputs = [];
+    protected array $sent = [];
 
     public function __construct(
-        readonly private string $name,
+        readonly protected string $name,
     ) {}
 
     public function name(): string
@@ -84,7 +83,7 @@ class Broadcast extends Module
 
 class Conjunction extends Module
 {
-    private array $states = [];
+    protected array $states = [];
 
     public function addInput(Module $module)
     {
@@ -112,7 +111,7 @@ class Conjunction extends Module
 
 class FlipFlop extends Module
 {
-    private bool $state = false;
+    protected bool $state = false;
 
     public function receive(Module $sender, Pulse $pulse)
     {
