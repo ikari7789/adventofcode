@@ -47,6 +47,8 @@ abstract class Module
 
     public function receive(Module $sender, Pulse $pulse)
     {
+        Fiber::suspend();
+
         if (!isset($this->inputs[$sender->name()])) {
             $this->inputs[$sender->name()] = $sender;
         }
@@ -54,11 +56,18 @@ abstract class Module
 
     protected function send(Pulse $pulse)
     {
+        $fibers = [];
         foreach ($this->outputs as $module) {
-            $pulseString = $pulse === Pulse::Low ? '-low->' : '-high->';
-            printf('%s %s %s' . PHP_EOL, $this->name(), $pulseString, $module->name());
-            $module->receive($this, $pulse);
-            $this->sent[] = $pulse;
+            $fibers[] = new Fiber(function () use ($module, $pulse) {
+                $pulseString = $pulse === Pulse::Low ? '-low->' : '-high->';
+                printf('%s %s %s' . PHP_EOL, $this->name(), $pulseString, $module->name());
+                $module->receive($this, $pulse);
+                $this->sent[] = $pulse;
+            });
+        }
+
+        foreach ($fibers as $fiber) {
+            $fiber->start();
         }
     }
 }
